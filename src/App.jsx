@@ -1,151 +1,93 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+// New App.jsx with Wolt-style layout (10 dishes)
+import React, { useState } from "react";
 import "./App.css";
 
+const menuItems = [
+  { name: "Khinkali", desc: "Georgian dumplings", price: "€8", image: "/img/khinkali.jpg" },
+  { name: "Lobio", desc: "Stewed beans with herbs", price: "€6", image: "/img/lobio.jpg" },
+  { name: "Ojakhuri", desc: "Fried pork & potatoes", price: "€11", image: "/img/ojakhuri.jpg" },
+  { name: "Chakhokhbili", desc: "Chicken stew with herbs", price: "€10", image: "/img/chakhokhbili.jpg" },
+  { name: "Pkhali Trio", desc: "Spinach, beetroot & walnut paste", price: "€6", image: "/img/pkhali.jpg" },
+  { name: "Eggplant Rolls", desc: "Stuffed with walnut-garlic paste", price: "€6.50", image: "/img/eggplant-rolls.jpg" },
+  { name: "Adjaruli Khachapuri", desc: "Cheese bread with egg", price: "€9", image: "/img/khachapuri.jpg" },
+  { name: "Mtsvadi", desc: "Grilled pork skewers", price: "€12", image: "/img/mtsvadi.jpg" },
+  { name: "Pelamushi", desc: "Grape pudding dessert", price: "€5", image: "/img/pelamushi.jpg" },
+  { name: "Saperavi Red Wine", desc: "Dry Georgian wine", price: "€5 / glass", image: "/img/saperavi.jpg" }
+];
+
 function App() {
-  const [showModal, setShowModal] = useState(false);
-
-  const menuItems = [
-    { title: "Khinkali", image: "/img/khinkali.jpg", price: "€8", desc: "Traditional Georgian dumplings with spiced meat filling." },
-    { title: "Khachapuri", image: "/img/khachapuri.jpg", price: "€10", desc: "Cheese-filled boat-shaped bread topped with an egg." },
-    { title: "Lobio", image: "/img/lobio.jpg", price: "€7", desc: "Spiced kidney bean stew served with fresh herbs." },
-  ];
-
-  const fullMenu = [
-    {
-      category: "Appetizers",
-      items: [
-        { name: "Pkhali Trio", desc: "Spinach, beetroot and walnut paste", price: "€6" },
-        { name: "Eggplant Rolls", desc: "With walnut-garlic paste", price: "€6.50" },
-      ],
-    },
-    {
-      category: "Main Dishes",
-      items: [
-        { name: "Khinkali", desc: "Dumplings with meat or mushrooms", price: "€8" },
-        { name: "Ojakhuri", desc: "Fried pork with potatoes", price: "€11" },
-        { name: "Chakhokhbili", desc: "Chicken stew with fresh herbs", price: "€10" },
-      ],
-    },
-    {
-      category: "Desserts",
-      items: [
-        { name: "Pelamushi", desc: "Georgian grape pudding", price: "€5" },
-      ],
-    },
-    {
-      category: "Beverages",
-      items: [
-        { name: "Borjomi", desc: "Georgian mineral water", price: "€2.50" },
-        { name: "Saperavi Red Wine", desc: "Dry red wine", price: "€5 / glass" },
-      ],
-    },
-  ];
+  const [showReserve, setShowReserve] = useState(false);
 
   return (
-    <div className="site-wrapper">
-      <header className="site-header">
-        <h1>Pepella Düsseldorf</h1>
+    <div className="app-wrapper">
+      <header className="top-nav">
+        <h1>Pepella</h1>
         <nav>
-          <a href="#about">About</a>
           <a href="#menu">Menu</a>
+          <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
       </header>
 
-      <section className="hero-section">
-        <h2>Authentic Georgian Cuisine</h2>
+      <section className="hero-banner">
+        <div className="hero-text">
+          <h2>Discover Authentic Georgian Cuisine</h2>
+          <p>Traditional flavors, modern comfort — now in Düsseldorf.</p>
+          <button onClick={() => setShowReserve(true)}>Reserve a Table</button>
+        </div>
+        <div className="hero-image">
+          <img src="/img/restaurant.jpg" alt="Interior of Pepella" />
+        </div>
       </section>
 
-      <section id="about" className="content-section">
-        <h2>About Us</h2>
-        <p>
-          Pepella brings the flavors of Georgia to the heart of Düsseldorf. Enjoy traditional dishes in a cozy and elegant atmosphere inspired by Georgian heritage.
-        </p>
-      </section>
-
-      <section id="menu" className="content-section dark-bg">
-        <h2>Our Highlights</h2>
-        <Carousel showThumbs={false} infiniteLoop autoPlay interval={4000} showStatus={false}>
+      <section id="menu" className="menu-section">
+        <h3>Our Popular Dishes</h3>
+        <div className="menu-grid">
           {menuItems.map((item, index) => (
-            <div key={index} className="carousel-slide">
-              <img src={item.image} alt={item.title} />
-              <h3>{item.title} - {item.price}</h3>
+            <div className="menu-card" key={index}>
+              <img src={item.image} alt={item.name} />
+              <h4>{item.name}</h4>
               <p>{item.desc}</p>
-            </div>
-          ))}
-        </Carousel>
-
-        <div className="full-menu">
-          <h2>Full Menu</h2>
-          {fullMenu.map((section, idx) => (
-            <div key={idx} className="menu-section">
-              <h3>{section.category}</h3>
-              <ul>
-                {section.items.map((item, i) => (
-                  <li key={i}>
-                    <div className="menu-item">
-                      <div>
-                        <strong>{item.name}</strong>
-                        <p>{item.desc}</p>
-                      </div>
-                      <span>{item.price}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <span>{item.price}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="contact" className="content-section">
-        <h2>Contact & Hours</h2>
-        <p>Address: Musterstraße 123, Düsseldorf</p>
-        <p>Phone: +49 123 456789</p>
-        <p>Email: info@pepella.de</p>
-        <p>Open: Mon-Sun 12:00–22:00</p>
-        <div className="map-wrapper">
-          <iframe
-            src="https://www.google.com/maps/embed?..."
-            width="100%"
-            height="250"
-            allowFullScreen=""
-            loading="lazy"
-          ></iframe>
-        </div>
+      <section id="about" className="about-section">
+        <h3>About Pepella</h3>
+        <p>Pepella is a family-owned Georgian restaurant serving delicious, heartfelt meals made from generations-old recipes, in a modern yet cozy setting.</p>
       </section>
 
-      <button className="floating-button" onClick={() => setShowModal(true)}>Reserve</button>
+      <section id="contact" className="contact-section">
+        <h3>Find Us</h3>
+        <p>📍 Musterstraße 123, Düsseldorf</p>
+        <p>📞 +49 123 456789</p>
+        <p>📧 info@pepella.de</p>
+      </section>
 
-      {showModal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="modal-overlay"
-        >
-          <div className="modal">
-            <button className="close-button" onClick={() => setShowModal(false)}>&times;</button>
-            <h3>Reserve a Table</h3>
-            <form className="reservation-form">
+      <footer className="bottom-nav">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </footer>
+
+      {showReserve && (
+        <div className="reservation-modal">
+          <div className="modal-content">
+            <button className="close-btn" onClick={() => setShowReserve(false)}>&times;</button>
+            <h3>Reserve Your Table</h3>
+            <form>
               <input type="text" placeholder="Name" required />
               <input type="email" placeholder="Email" required />
-              <input type="tel" placeholder="Phone" required />
               <input type="datetime-local" required />
               <input type="number" placeholder="Guests" min="1" max="20" required />
               <textarea placeholder="Special requests" rows="3"></textarea>
-              <button type="submit">Confirm</button>
+              <button type="submit">Confirm Reservation</button>
             </form>
           </div>
-        </motion.div>
+        </div>
       )}
-
-      <footer className="site-footer">
-        &copy; {new Date().getFullYear()} Pepella Düsseldorf | <a href="#">Impressum</a> | <a href="#">Privacy</a>
-      </footer>
     </div>
   );
 }
