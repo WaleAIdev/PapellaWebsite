@@ -1,34 +1,43 @@
-// App.jsx - Updated for new requirements
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 
-const menuItems = [
-  { name: "Khinkali", desc: "Georgian dumplings", price: "€8", image: "/img/khinkali.jpg" },
-  { name: "Lobio", desc: "Stewed beans with herbs", price: "€6", image: "/img/lobio.jpg" },
-  { name: "Ojakhuri", desc: "Fried pork & potatoes", price: "€11", image: "/img/ojakhuri.jpg" },
-  { name: "Chakhokhbili", desc: "Chicken stew", price: "€10", image: "/img/chakhokhbili.jpg" },
-  { name: "Pkhali Trio", desc: "Spinach, beetroot & walnut paste", price: "€6", image: "/img/pkhali.jpg" },
-  { name: "Eggplant Rolls", desc: "Stuffed with walnut-garlic paste", price: "€6.50", image: "/img/eggplant-rolls.jpg" },
-  { name: "Adjaruli Khachapuri", desc: "Cheese bread with egg", price: "€9", image: "/img/khachapuri.jpg" },
-  { name: "Mtsvadi", desc: "Grilled pork skewers", price: "€12", image: "/img/mtsvadi.jpg" },
-  { name: "Pelamushi", desc: "Grape pudding dessert", price: "€5", image: "/img/pelamushi.jpg" },
-  { name: "Saperavi Red Wine", desc: "Dry Georgian wine", price: "€5 / glass", image: "/img/saperavi.jpg" }
+// Placeholder data: 50 items in 8 categories
+const menuSections = [
+  { title: "Appetizers", items: Array.from({ length: 6 }, (_, i) => ({ name: `Appetizer ${i+1}`, desc: "Delicious starter placeholder", price: `€${5 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Main Dishes", items: Array.from({ length: 6 }, (_, i) => ({ name: `Main Dish ${i+1}`, desc: "Hearty main placeholder", price: `€${10 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Fish", items: Array.from({ length: 6 }, (_, i) => ({ name: `Fish Dish ${i+1}`, desc: "Fresh fish placeholder", price: `€${12 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Meat", items: Array.from({ length: 6 }, (_, i) => ({ name: `Meat Dish ${i+1}`, desc: "Savory meat placeholder", price: `€${14 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Desserts", items: Array.from({ length: 6 }, (_, i) => ({ name: `Dessert ${i+1}`, desc: "Sweet dessert placeholder", price: `€${4 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Soft Drinks", items: Array.from({ length: 6 }, (_, i) => ({ name: `Drink ${i+1}`, desc: "Cool drink placeholder", price: `€${2 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Beer", items: Array.from({ length: 6 }, (_, i) => ({ name: `Beer ${i+1}`, desc: "Chilled beer placeholder", price: `€${3 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Wine", items: Array.from({ length: 8 }, (_, i) => ({ name: `Wine ${i+1}`, desc: "Fine wine placeholder", price: `€${6 + i}`, image: "/img/placeholder.jpg" })) },
 ];
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="app-wrapper">
-      {/* Header */}
+      {/* Sticky Header with Hamburger */}
       <header className="top-nav">
         <h1>Pepella Düsseldorf</h1>
-        <nav>
-          <a href="#menu">Menu</a>
+        <nav className="desktop-nav">
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
+          <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            ☰
+            {menuOpen && (
+              <div className="dropdown">
+                {menuSections.map((sec, idx) => (
+                  <a key={idx} href={`#section-${idx}`}>{sec.title}</a>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
       </header>
 
-      {/* Hero Section with Chef's Special overlay */}
+      {/* Hero Section */}
       <section className="hero-banner">
         <div className="hero-image">
           <img src="/img/chef-special.jpg" alt="Chef's Special Dish" />
@@ -40,40 +49,33 @@ function App() {
         </div>
       </section>
 
-      {/* Floating Reserve Button (always visible) */}
-      <a
-        className="floating-reserve-button"
-        href="https://reserve.pepella.de"
-      >
-        Reserve a Table
-      </a>
+      {/* Floating Reserve Bar */}
+      <a className="floating-reserve-bar" href="https://reserve.pepella.de">Reserve a Table</a>
 
-      {/* Menu Section */}
-      <section id="menu" className="menu-section">
-        <h3>Our Popular Dishes</h3>
-        <div className="menu-grid">
-          {menuItems.map((item, idx) => (
-            <div className="menu-card" key={idx}>
-              <img src={item.image} alt={item.name} />
-              <h4>{item.name}</h4>
-              <p>{item.desc}</p>
-              <span>{item.price}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Menu Sections: 3 columns on desktop */}
+      {menuSections.map((sec, idx) => (
+        <section key={idx} id={`section-${idx}`} className="menu-section">
+          <h3>{sec.title}</h3>
+          <div className="menu-grid">
+            {sec.items.map((item, i) => (
+              <div className="menu-card horizontal" key={i}>
+                <div className="card-info">
+                  <h4>{item.name}</h4>
+                  <span>{item.price}</span>
+                  <p>{item.desc}</p>
+                </div>
+                <img src={item.image} alt={item.name} />
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
 
-      {/* About Section */}
+      {/* About & Contact */}
       <section id="about" className="about-section">
         <h3>About Pepella</h3>
-        <p>
-          Pepella is a family-owned Georgian restaurant serving delicious,
-          heartfelt meals made from generations-old recipes in a modern yet
-          cozy setting.
-        </p>
+        <p>Pepella is a family-owned Georgian restaurant serving delicious, heartfelt meals made from generations-old recipes.</p>
       </section>
-
-      {/* Contact Section */}
       <section id="contact" className="contact-section">
         <h3>Find Us</h3>
         <p>📍 Musterstraße 123, Düsseldorf</p>
@@ -81,7 +83,6 @@ function App() {
         <p>📧 info@pepella.de</p>
       </section>
 
-      {/* Footer */}
       <footer className="site-footer">
         &copy; {new Date().getFullYear()} Pepella Düsseldorf | Impressum | Privacy
       </footer>
