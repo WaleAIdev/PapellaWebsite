@@ -1,4 +1,4 @@
-/* App.css - Wolt-inspired layout for Pepella */
+/* App.css - Wolt-inspired layout for Pepella Düsseldorfs */
 html, body {
   margin: 0;
   padding: 0;
@@ -209,6 +209,28 @@ a {
   }
 }
 
+/* Floating reservation button */
+.floating-reserve-button {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: #fcd34d;
+  color: #000;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s;
+}
+
+.floating-reserve-button:hover {
+  transform: scale(1.05);
+}
+
+/* Reservation modal styles */
 .reservation-modal {
   position: fixed;
   inset: 0;
