@@ -104,6 +104,8 @@ a {
 
 /* Floating reservation button (desktop & mobile) */
 .floating-reserve-button {
+  display: inline-block;
+  text-decoration: none;
   position: fixed !important;
   bottom: 1.5rem !important;
   right: 1.5rem !important;
@@ -271,4 +273,26 @@ a {
   padding: 1rem 0;
   color: #666;
   margin-top: auto;
+}
+/* Mobile hero adjustments */
+@media (max-width: 768px) {
+  .hero-banner {
+    flex-direction: column-reverse;
+    padding: 2rem 1rem;
+  }
+  .hero-image,
+  .hero-text {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  .hero-text h2 {
+    font-size: 1.8rem;
+  }
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+  .hero-image img {
+    height: 300px;
+    object-fit: cover;
+  }
 }
