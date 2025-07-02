@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
 
-// Placeholder data: 50 items in 8 categories
 const menuSections = [
-  { title: "Appetizers", items: Array.from({ length: 6 }, (_, i) => ({ name: `Appetizer ${i+1}`, desc: "Delicious starter placeholder", price: `€${5 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Main Dishes", items: Array.from({ length: 6 }, (_, i) => ({ name: `Main Dish ${i+1}`, desc: "Hearty main placeholder", price: `€${10 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Fish", items: Array.from({ length: 6 }, (_, i) => ({ name: `Fish Dish ${i+1}`, desc: "Fresh fish placeholder", price: `€${12 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Meat", items: Array.from({ length: 6 }, (_, i) => ({ name: `Meat Dish ${i+1}`, desc: "Savory meat placeholder", price: `€${14 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Desserts", items: Array.from({ length: 6 }, (_, i) => ({ name: `Dessert ${i+1}`, desc: "Sweet dessert placeholder", price: `€${4 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Soft Drinks", items: Array.from({ length: 6 }, (_, i) => ({ name: `Drink ${i+1}`, desc: "Cool drink placeholder", price: `€${2 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Beer", items: Array.from({ length: 6 }, (_, i) => ({ name: `Beer ${i+1}`, desc: "Chilled beer placeholder", price: `€${3 + i}`, image: "/img/placeholder.jpg" })) },
-  { title: "Wine", items: Array.from({ length: 8 }, (_, i) => ({ name: `Wine ${i+1}`, desc: "Fine wine placeholder", price: `€${6 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Appetizers", items: Array.from({ length: 6 }, (_, i) => ({ name: `Appetizer ${i + 1}`, desc: "Delicious starter placeholder", price: `€${5 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Main Dishes", items: Array.from({ length: 6 }, (_, i) => ({ name: `Main Dish ${i + 1}`, desc: "Hearty main placeholder", price: `€${10 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Fish", items: Array.from({ length: 6 }, (_, i) => ({ name: `Fish Dish ${i + 1}`, desc: "Fresh fish placeholder", price: `€${12 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Meat", items: Array.from({ length: 6 }, (_, i) => ({ name: `Meat Dish ${i + 1}`, desc: "Savory meat placeholder", price: `€${14 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Desserts", items: Array.from({ length: 6 }, (_, i) => ({ name: `Dessert ${i + 1}`, desc: "Sweet dessert placeholder", price: `€${4 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Soft Drinks", items: Array.from({ length: 6 }, (_, i) => ({ name: `Drink ${i + 1}`, desc: "Cool drink placeholder", price: `€${2 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Beer", items: Array.from({ length: 6 }, (_, i) => ({ name: `Beer ${i + 1}`, desc: "Chilled beer placeholder", price: `€${3 + i}`, image: "/img/placeholder.jpg" })) },
+  { title: "Wine", items: Array.from({ length: 8 }, (_, i) => ({ name: `Wine ${i + 1}`, desc: "Fine wine placeholder", price: `€${6 + i}`, image: "/img/placeholder.jpg" })) },
 ];
 
 function App() {
@@ -18,8 +17,8 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      {/* Sticky Header with Hamburger */}
-      <header className="top-nav">
+      {/* Header */}
+                  <header className="top-nav">
         <h1>Pepella Düsseldorf</h1>
         <nav className="desktop-nav">
           <a href="#about">About</a>
@@ -37,6 +36,8 @@ function App() {
         </nav>
       </header>
 
+
+
       {/* Hero Section */}
       <section className="hero-banner">
         <div className="hero-image">
@@ -52,7 +53,7 @@ function App() {
       {/* Floating Reserve Bar */}
       <a className="floating-reserve-bar" href="https://reserve.pepella.de">Reserve a Table</a>
 
-      {/* Menu Sections: 3 columns on desktop */}
+      {/* Menu Sections with 3 columns */}
       {menuSections.map((sec, idx) => (
         <section key={idx} id={`section-${idx}`} className="menu-section">
           <h3>{sec.title}</h3>

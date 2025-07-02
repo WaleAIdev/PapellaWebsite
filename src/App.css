@@ -6,7 +6,7 @@ html, body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #121212;
   color: #f0f0f0;
-  overflow-x: hidden;
+  overflow-x: visible;
 }
 
 /* Ensure content starts below header */
@@ -17,7 +17,7 @@ html, body {
   padding-top: 4rem; /* space for fixed header */
 }
 
-/* ─── Header & Nav ───────────────────────────────────────────── */
+/* Fixed header */
 .top-nav {
   position: fixed;
   top: 0;
@@ -38,37 +38,36 @@ html, body {
   font-size: 1.5rem;
 }
 
-/* Container for About / Contact / Hamburger */
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;           /* equal spacing between items */
+  gap: 1.5rem;
 }
 
-/* Each link */
+
 .desktop-nav a {
+  margin-left: 1.5rem;
   color: #ccc;
   text-decoration: none;
   transition: color 0.3s;
 }
+
 .desktop-nav a:hover {
   color: #fff;
 }
 
-/* Hamburger icon */
+/* Hamburger and dropdown with visible styling */
 .hamburger {
-  display: block;        /* ensure it’s rendered */
-  font-size: 1.6rem;     /* big enough to see */
+  display: inline-block;
+  font-size: 2rem;       /* larger for visibility */
   line-height: 1;
-  color: #ccc;
+  color: #fcd34d;        /* gold color to stand out */
   cursor: pointer;
   user-select: none;
-  margin-left:  auto;    /* pushes it to the rightmost */
   position: relative;
   z-index: 1001;
-}
+  }
 
-/* Dropdown menu */
 .dropdown {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -79,15 +78,16 @@ html, body {
   overflow: hidden;
   z-index: 1002;
 }
+
 .dropdown a {
   display: block;
   padding: 0.75rem 1rem;
   color: #f0f0f0;
 }
+
 .dropdown a:hover {
   background: #333;
 }
-
 
 /* Hero Section */
 .hero-banner {
