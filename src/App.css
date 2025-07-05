@@ -59,12 +59,13 @@ html, body {
 /* Hamburger and dropdown with visible styling */
 .hamburger {
   display: inline-block;
+  right: 2rem;          /* pin it 2rem from the right edge */
   font-size: 2rem;       /* larger for visibility */
   line-height: 1;
   color: #fcd34d;        /* gold color to stand out */
   cursor: pointer;
   user-select: none;
-  position: relative;
+  position: absolute;
   z-index: 1001;
   }
 
@@ -75,7 +76,7 @@ html, body {
   background: #1a1a1a;
   border: 1px solid #333;
   border-radius: 4px;
-  overflow: hidden;
+  overflow: visible;
   z-index: 1002;
 }
 
